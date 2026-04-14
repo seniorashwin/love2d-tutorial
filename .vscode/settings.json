@@ -3,6 +3,7 @@
         "love",
         "player",
         "graphics",
-        "background"
+        "background",
+        "anim8"
     ]
 }
