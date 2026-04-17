@@ -4,6 +4,13 @@
         "player",
         "graphics",
         "background",
-        "anim8"
+        "anim8",
+        "terrain",
+        "sti",
+        "gameMap"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-field",
+        "deprecated"
     ]
 }
