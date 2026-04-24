@@ -7,7 +7,9 @@
         "anim8",
         "terrain",
         "sti",
-        "gameMap"
+        "gameMap",
+        "camera",
+        "cam"
     ],
     "Lua.diagnostics.disable": [
         "undefined-field",

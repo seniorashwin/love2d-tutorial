@@ -1,4 +1,7 @@
 function love.load()
+    camera = require 'libraries.camera'
+    cam = camera()
+
     anim8 = require 'libraries.anim8'
     love.graphics.setDefaultFilter("nearest", "nearest")
 
@@ -55,9 +58,40 @@ function love.update(dt)
     end
 
     player.anim:update(dt)
+
+    cam:lookAt(player.x, player.y)
+
+    local w = love.graphics.getWidth()
+    local h = love.graphics.getHeight()
+
+    if player.x < w / 2 then
+        player.x = w / 2
+    end
+    if player.y < h / 2 then
+        player.y = h / 2
+    end
+
+    local mapW = gameMap.width * gameMap.tilewidth
+    local mapH = gameMap.height * gameMap.tileheight
+
+    -- Right border
+    if player.x > mapW - w / 2 then
+        player.x = mapW - w / 2
+    end
+
+    -- Bottom border
+    if player.y > mapH - h / 2 then
+        player.y = mapH - h / 2
+    end
 end
 
 function love.draw()
-    gameMap:draw()
-    player.anim:draw(player.spriteSheet, player.x, player.y, nil, 4)
+    cam:attach()
+    gameMap:drawLayer(gameMap.layers["Grass"])
+    gameMap:drawLayer(gameMap.layers["Road"])
+    gameMap:drawLayer(gameMap.layers["Trees"])
+    player.anim:draw(player.spriteSheet, player.x, player.y, nil, 4, nil, 6, 9, 0)
+    cam:detach()
+
+    love.graphics.print("X: " .. tostring(player.x) .. " Y: " .. tostring(player.y), 10, 10)
 end
